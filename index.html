@@ -1032,10 +1032,8 @@ function reshuffleResult() {
   const fixed=new Set(SA.seats.filter(s=>s.fixed&&s.student).map(s=>s.student));
   const toShuffle=shuffle(seatActiveStudents().filter(s=>!fixed.has(s)));
   SA.seats.filter(s=>!s.fixed).forEach(s=>s.student=null);
-  toShuffle.forEach((st,i)=>{
-    const empty=SA.seats.filter(s=>!s.student&&!s.fixed);
-    if(i<empty.length)empty[i].student=st;
-  });
+  const empty=SA.seats.filter(s=>!s.student&&!s.fixed);
+  toShuffle.forEach((st,i)=>{ if(i<empty.length) empty[i].student=st; });
   seatClickSel=null; seatRenderResultGrid();
 }
 
