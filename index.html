@@ -442,6 +442,118 @@
       body { background: white; }
       .card { box-shadow: none; padding: 0; }
     }
+
+    /* ══ Modal ══ */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.5); backdrop-filter: blur(2px);
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: white; border-radius: 16px;
+      width: 100%; max-width: 500px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      max-height: 90vh; display: flex; flex-direction: column;
+      animation: modal-in .18s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes modal-in {
+      from { transform: scale(.92) translateY(10px); opacity: 0; }
+      to   { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 1.25rem .9rem; border-bottom: 1px solid #e2e8f0;
+    }
+    .modal-title { font-size: 1rem; font-weight: 700; color: #0f172a; }
+    .modal-close {
+      width: 28px; height: 28px; border-radius: 50%; border: none;
+      background: #f1f5f9; color: #64748b; cursor: pointer;
+      font-size: .85rem; display: flex; align-items: center; justify-content: center;
+      transition: background .13s;
+    }
+    .modal-close:hover { background: #e2e8f0; color: #0f172a; }
+    .modal-body { padding: 1.1rem 1.25rem; overflow-y: auto; flex: 1; }
+    .modal-footer {
+      padding: .9rem 1.25rem; border-top: 1px solid #e2e8f0;
+      display: flex; justify-content: flex-end; gap: .5rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; }
+    .form-group > label { font-size: .83rem; font-weight: 600; color: #374151; }
+    .form-group input[type="text"] {
+      padding: .5rem .75rem; border: 2px solid #e2e8f0; border-radius: 8px;
+      font-size: .9rem; outline: none; transition: border-color .15s; width: 100%;
+    }
+    .form-group input[type="text"]:focus { border-color: #4f46e5; }
+    .num-input-row {
+      display: flex; align-items: center; gap: .5rem; margin-top: .4rem;
+    }
+    .num-input-row input { flex: 1; min-width: 0; }
+    .num-chip-wrap {
+      display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .65rem;
+      min-height: 32px;
+    }
+    .num-chip-item {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: #e0e7ff; color: #4338ca; font-weight: 700;
+      font-size: .8rem; padding: .22rem .45rem .22rem .6rem;
+      border-radius: 20px; border: 1.5px solid #c7d2fe;
+    }
+    .num-chip-del {
+      background: none; border: none; color: #818cf8; cursor: pointer;
+      font-size: .75rem; line-height: 1; padding: 0 .1rem;
+      transition: color .12s;
+    }
+    .num-chip-del:hover { color: #b91c1c; }
+    .num-status {
+      margin-top: .6rem; font-size: .77rem; padding: .45rem .7rem;
+      border-radius: 7px; line-height: 1.55; display: none;
+    }
+    .num-status.show   { display: block; }
+    .num-status.info   { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .num-status.warn   { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+    .num-status.danger { background: #fff7ed; color: #9a3412; border: 1px solid #fed7aa; }
+
+
+    /* ══ Settings screen ══ */
+    #settings-btn {
+      background: rgba(255,255,255,.13); border: none; color: white;
+      width: 32px; height: 32px; border-radius: 8px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s; flex-shrink: 0; margin-left: auto;
+    }
+    #settings-btn:hover { background: rgba(255,255,255,.25); }
+    .rule-card {
+      border: 2px solid #e2e8f0; border-radius: 10px;
+      padding: .9rem 1rem; margin-bottom: .65rem; transition: border-color .15s;
+    }
+    .rule-card:hover { border-color: #c7d2fe; }
+    .rule-card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: .55rem; flex-wrap: wrap; gap: .4rem;
+    }
+    .rule-name { font-weight: 700; color: #0f172a; font-size: .95rem; }
+    .rule-actions { display: flex; gap: .35rem; }
+    .rule-nums { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .rule-num-chip {
+      background: #f0f4ff; color: #4f46e5; font-size: .76rem; font-weight: 700;
+      padding: .2rem .55rem; border-radius: 20px; border: 1px solid #c7d2fe;
+    }
+    .rules-empty {
+      text-align: center; padding: 2.5rem 1rem;
+      color: #94a3b8; font-size: .85rem; line-height: 1.8;
+    }
+    /* ══ Toast ══ */
+    #toast {
+      position: fixed; bottom: 1.8rem; left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      background: #1e293b; color: white;
+      padding: .55rem 1.3rem; border-radius: 20px;
+      font-size: .83rem; font-weight: 600;
+      opacity: 0; transition: opacity .22s, transform .22s;
+      z-index: 300; pointer-events: none; white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
@@ -455,6 +567,11 @@
     <h1>DrawSeat</h1>
   </div>
   <button id="home-btn" onclick="goHome()">← 홈</button>
+  <button id="settings-btn" onclick="startSettings()" title="설정">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+    </svg>
+  </button>
 </header>
 
 <!-- ══════════════════════════════════════════════════════
@@ -680,21 +797,78 @@
   </div>
 </div><!-- /slot-screen -->
 
+<!-- ══════════════════════════════════════════════════════
+     SETTINGS SCREEN
+══════════════════════════════════════════════════════ -->
+<div id="settings-screen" class="screen">
+  <div class="main" style="padding-top:1.5rem">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;flex-wrap:wrap;gap:.5rem">
+        <div class="card-title" style="margin:0">붙으면 안 되는 학우</div>
+        <div style="display:flex;gap:.4rem">
+          <button class="btn btn-secondary" onclick="copyShareURL()">🔗 링크 복사</button>
+          <button class="btn btn-primary" onclick="openRuleModal()">+ 새 규칙 추가</button>
+        </div>
+      </div>
+      <p class="hint">자리 배정 시 특정 번호끼리 붙지 않도록 규칙을 저장하세요. <b>링크 복사</b>로 생성한 URL을 공유하면 다른 기기에서도 동일한 규칙이 자동 적용됩니다.</p>
+      <div id="rules-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     RULE MODAL
+══════════════════════════════════════════════════════ -->
+<div id="rule-modal" class="modal-overlay" onclick="onModalOverlayClick(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title-text">새 규칙 추가</span>
+      <button class="modal-close" onclick="closeRuleModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="rule-name-inp">규칙 이름</label>
+        <input type="text" id="rule-name-inp" placeholder="예: 3학년 1반" maxlength="30"
+          onkeydown="if(event.key==='Enter')document.getElementById('pair-a').focus()">
+      </div>
+      <div class="form-group" style="margin-top:1.1rem">
+        <label>붙으면 안 되는 번호</label>
+        <div class="num-input-row">
+          <input type="text" id="num-inp" placeholder="예: 1, 3, 15" inputmode="numeric"
+            onkeydown="if(event.key==='Enter')addNumber()">
+          <button class="btn btn-primary" style="white-space:nowrap" onclick="addNumber()">추가</button>
+        </div>
+        <div class="num-chip-wrap" id="num-chip-wrap">
+          <span style="font-size:.78rem;color:#94a3b8">아직 추가된 번호가 없습니다.</span>
+        </div>
+        <div id="num-status" class="num-status"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeRuleModal()">취소</button>
+      <button class="btn btn-success" onclick="saveRule()">저장</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
 <script>
 // ════════════════════════════════════════════════════════
 //  APP NAVIGATION
 // ════════════════════════════════════════════════════════
 function showScreen(id) {
-  ['home-screen','seat-screen','slot-screen'].forEach(s => {
+  ['home-screen','seat-screen','slot-screen','settings-screen'].forEach(s => {
     const el = document.getElementById(s);
     el.classList.toggle('active', el.id === id);
   });
   document.getElementById('home-btn').style.display = id === 'home-screen' ? 'none' : 'flex';
 }
 
-function goHome()      { showScreen('home-screen'); }
-function startSeatApp(){ showScreen('seat-screen'); seatSetStep(1); }
-function startSlotApp(){ showScreen('slot-screen'); smSetStep(1); }
+function goHome()        { showScreen('home-screen'); }
+function startSeatApp()  { showScreen('seat-screen'); seatSetStep(1); }
+function startSlotApp()  { showScreen('slot-screen'); smSetStep(1); }
+function startSettings() { showScreen('settings-screen'); renderRulesList(); }
 
 
 // ════════════════════════════════════════════════════════
@@ -1027,29 +1201,93 @@ function onDropToList(e) {
   seatDragSrc=null; seatRenderAssignGrid(); seatRenderUABar();
 }
 
+// ── Constraint helpers
+function getConstraintPairs() {
+  const rules = _loadRules();
+  const pairSet = new Set();
+  rules.forEach(rule => {
+    const nums = rule.numbers || [];
+    for (let i = 0; i < nums.length; i++)
+      for (let j = i+1; j < nums.length; j++) {
+        const a = Math.min(nums[i], nums[j]), b = Math.max(nums[i], nums[j]);
+        pairSet.add(a + ',' + b);
+      }
+  });
+  return [...pairSet].map(k => k.split(',').map(Number));
+}
+
+function checkConstraints(seats, pairs) {
+  if (!pairs.length) return true;
+  const pos = {};
+  seats.forEach(s => { if (s.student !== null) pos[s.student] = s; });
+  for (const [a, b] of pairs) {
+    const sa = pos[a], sb = pos[b];
+    if (!sa || !sb) continue;
+    if (Math.abs(sa.row - sb.row) + Math.abs(sa.col - sb.col) === 1) return false;
+  }
+  return true;
+}
+
+function _assignWithConstraints(students, emptySeats, pairs, maxRetries) {
+  for (let t = 0; t < maxRetries; t++) {
+    const shuffled = shuffle(students);
+    emptySeats.forEach((seat, i) => {
+      seat.student = i < shuffled.length ? shuffled[i] : null;
+      seat.fixed = false;
+    });
+    if (checkConstraints(SA.seats, pairs)) return true;
+  }
+  return false;
+}
+
 function doFullRandom() {
-  SA.seats.forEach(s=>{s.student=null;s.fixed=false;});
-  shuffle(seatActiveStudents()).forEach((st,i)=>{if(i<SA.seats.length)SA.seats[i].student=st;});
-  seatClickSel=null; seatGoToResult();
+  const pairs = getConstraintPairs();
+  const students = seatActiveStudents();
+  SA.seats.forEach(s => { s.student = null; s.fixed = false; });
+  if (pairs.length) {
+    let found = false;
+    for (let t = 0; t < 1000 && !found; t++) {
+      SA.seats.forEach(s => s.student = null);
+      const slots = shuffle([...SA.seats]).slice(0, students.length);
+      shuffle(students).forEach((st, i) => { slots[i].student = st; });
+      found = checkConstraints(SA.seats, pairs);
+    }
+  } else {
+    shuffle(students).forEach((st, i) => { if (i < SA.seats.length) SA.seats[i].student = st; });
+  }
+  seatClickSel = null; seatGoToResult();
 }
+
 function doRandRemaining() {
-  const ua=shuffle(seatUnassigned());
-  const empty=SA.seats.filter(s=>!s.student);
-  ua.forEach((st,i)=>{if(i<empty.length){empty[i].student=st;empty[i].fixed=false;}});
-  seatClickSel=null; seatGoToResult();
+  const pairs = getConstraintPairs();
+  const ua = seatUnassigned();
+  const empty = SA.seats.filter(s => !s.student);
+  if (pairs.length) {
+    _assignWithConstraints(ua, empty, pairs, 1000);
+  } else {
+    shuffle(ua).forEach((st, i) => { if (i < empty.length) { empty[i].student = st; empty[i].fixed = false; } });
+  }
+  seatClickSel = null; seatGoToResult();
 }
+
 function seatGoToResult() {
   seatRenderResultGrid();
-  document.getElementById('legend-fixed').style.display=SA.seats.some(s=>s.fixed)?'flex':'none';
+  document.getElementById('legend-fixed').style.display = SA.seats.some(s => s.fixed) ? 'flex' : 'none';
   seatSetStep(4);
 }
+
 function reshuffleResult() {
-  const fixed=new Set(SA.seats.filter(s=>s.fixed&&s.student).map(s=>s.student));
-  const toShuffle=shuffle(seatActiveStudents().filter(s=>!fixed.has(s)));
-  SA.seats.filter(s=>!s.fixed).forEach(s=>s.student=null);
-  const empty=SA.seats.filter(s=>!s.student&&!s.fixed);
-  toShuffle.forEach((st,i)=>{ if(i<empty.length) empty[i].student=st; });
-  seatClickSel=null; seatRenderResultGrid();
+  const pairs = getConstraintPairs();
+  const fixed = new Set(SA.seats.filter(s => s.fixed && s.student).map(s => s.student));
+  const toShuffle = seatActiveStudents().filter(s => !fixed.has(s));
+  SA.seats.filter(s => !s.fixed).forEach(s => s.student = null);
+  const empty = SA.seats.filter(s => !s.student && !s.fixed);
+  if (pairs.length) {
+    _assignWithConstraints(toShuffle, empty, pairs, 1000);
+  } else {
+    shuffle(toShuffle).forEach((st, i) => { if (i < empty.length) empty[i].student = st; });
+  }
+  seatClickSel = null; seatRenderResultGrid();
 }
 
 
@@ -1291,6 +1529,228 @@ function smClearHistory() {
   disp.className='sm-display idle'; disp.textContent='?';
   document.getElementById('sm-winner-label').className='sm-winner-label';
   document.getElementById('sm-start-btn').textContent='START';
+}
+
+
+// ════════════════════════════════════════════════════════
+//  TOAST
+// ════════════════════════════════════════════════════════
+let _toastTimer = null;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+// ════════════════════════════════════════════════════════
+//  URL RULE ENCODING — base64 hash, invisible to students
+// ════════════════════════════════════════════════════════
+function _encodeRulesHash(rules) {
+  if (!rules.length) return '';
+  // compact: [[name, [nums...]], ...]
+  const compact = rules.map(r => [r.name, r.numbers || []]);
+  return btoa(encodeURIComponent(JSON.stringify(compact)));
+}
+
+function _decodeRulesHash(hash) {
+  const compact = JSON.parse(decodeURIComponent(atob(hash)));
+  if (!Array.isArray(compact)) return null;
+  return compact.map(([name, numbers]) => ({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    name: String(name).slice(0, 30),
+    numbers: Array.isArray(numbers)
+      ? numbers.filter(n => Number.isInteger(n) && n >= 1 && n <= 200)
+      : [],
+    savedAt: new Date().toLocaleString('ko-KR'),
+  }));
+}
+
+// On load: if URL hash contains encoded rules, load them into localStorage
+(function () {
+  const hash = location.hash.slice(1);
+  if (!hash) return;
+  try {
+    const rules = _decodeRulesHash(hash);
+    if (rules && rules.length) {
+      localStorage.setItem('drawseat_no_adjacent_rules', JSON.stringify(rules));
+      // Clean hash from URL without reload
+      history.replaceState(null, '', location.pathname + location.search);
+    }
+  } catch { /* invalid hash — ignore */ }
+})();
+
+function copyShareURL() {
+  const rules = _loadRules();
+  if (!rules.length) {
+    showToast('저장된 규칙이 없습니다');
+    return;
+  }
+  const hash = _encodeRulesHash(rules);
+  const url = location.origin + location.pathname + (hash ? '#' + hash : '');
+  navigator.clipboard.writeText(url)
+    .then(() => showToast('링크가 복사되었습니다 ✓'))
+    .catch(() => {
+      // Fallback for browsers that block clipboard
+      prompt('아래 링크를 복사하세요:', url);
+    });
+}
+
+// ════════════════════════════════════════════════════════
+//  SETTINGS — 붙으면 안 되는 번호 규칙
+// ════════════════════════════════════════════════════════
+const LS_RULES_KEY = 'drawseat_no_adjacent_rules';
+let _editingRuleId = null;
+let _modalNums = []; // number[]
+
+function _loadRules() {
+  try { return JSON.parse(localStorage.getItem(LS_RULES_KEY)) || []; }
+  catch { return []; }
+}
+function _saveRulesToStorage(rules) {
+  localStorage.setItem(LS_RULES_KEY, JSON.stringify(rules));
+}
+
+function openRuleModal(ruleId) {
+  _editingRuleId = ruleId || null;
+  _modalNums = [];
+  const nameInp = document.getElementById('rule-name-inp');
+  document.getElementById('modal-title-text').textContent = ruleId ? '규칙 편집' : '새 규칙 추가';
+  if (ruleId) {
+    const rule = _loadRules().find(r => r.id === ruleId);
+    if (rule) {
+      nameInp.value = rule.name;
+      _modalNums = [...(rule.numbers || [])];
+    }
+  } else {
+    nameInp.value = '';
+  }
+  document.getElementById('num-inp').value = '';
+  _renderModalNums();
+  document.getElementById('rule-modal').classList.add('active');
+  nameInp.focus();
+}
+
+function closeRuleModal() {
+  document.getElementById('rule-modal').classList.remove('active');
+}
+
+function onModalOverlayClick(e) {
+  if (e.target === document.getElementById('rule-modal')) closeRuleModal();
+}
+
+function addNumber() {
+  const raw = document.getElementById('num-inp').value;
+  const nums = raw.split(/[\s,]+/).map(s => parseInt(s)).filter(n => !isNaN(n) && n >= 1);
+  if (nums.length === 0) { alert('번호를 입력하세요.'); return; }
+  let added = 0;
+  nums.forEach(n => {
+    if (!_modalNums.includes(n)) { _modalNums.push(n); added++; }
+  });
+  _modalNums.sort((a, b) => a - b);
+  _renderModalNums();
+  document.getElementById('num-inp').value = '';
+  document.getElementById('num-inp').focus();
+}
+
+function removeNumber(n) {
+  _modalNums = _modalNums.filter(x => x !== n);
+  _renderModalNums();
+}
+
+function _renderModalNums() {
+  const wrap = document.getElementById('num-chip-wrap');
+  const status = document.getElementById('num-status');
+  const n = _modalNums.length;
+
+  if (n === 0) {
+    wrap.innerHTML = '<span style="font-size:.78rem;color:#94a3b8">아직 추가된 번호가 없습니다.</span>';
+    status.className = 'num-status';
+    return;
+  }
+
+  wrap.innerHTML = _modalNums.map(num => `
+    <span class="num-chip-item">
+      ${num}번<button class="num-chip-del" onclick="removeNumber(${num})" title="삭제">✕</button>
+    </span>
+  `).join('');
+
+  const pairs = n * (n - 1) / 2;
+  if (n === 1) {
+    status.className = 'num-status warn show';
+    status.textContent = '⚠ 번호가 1개만 있으면 인접 제한이 적용되지 않습니다. 2개 이상 입력하세요.';
+  } else if (n <= 8) {
+    status.className = 'num-status info show';
+    status.textContent = `✓ ${n}명이 서로 인접하지 않도록 배정됩니다. (제한 쌍 ${pairs}개)`;
+  } else if (n <= 13) {
+    status.className = 'num-status warn show';
+    status.textContent = `⚠ 번호가 ${n}개(제한 쌍 ${pairs}개)입니다. 배정 조건이 복잡해져 시간이 걸릴 수 있습니다.`;
+  } else {
+    status.className = 'num-status danger show';
+    status.textContent = `⛔ 번호가 ${n}개로 너무 많습니다. 격자형 좌석에서 서로 인접하지 않게 앉힐 수 있는 최대 인원은 전체 좌석의 약 절반입니다. 배정이 불가능할 수 있습니다.`;
+  }
+}
+
+function saveRule() {
+  const name = document.getElementById('rule-name-inp').value.trim();
+  if (!name) { alert('규칙 이름을 입력하세요.'); document.getElementById('rule-name-inp').focus(); return; }
+  if (_modalNums.length === 0) { alert('번호를 최소 1개 이상 입력해주세요.'); return; }
+  if (_modalNums.length === 1 && !confirm(`번호가 1개(${_modalNums[0]}번)만 입력되어 인접 제한 효과가 없습니다.\n그래도 저장하시겠습니까?`)) return;
+  const rules = _loadRules();
+  const ruleData = {
+    id: _editingRuleId || Date.now().toString(36),
+    name,
+    numbers: [..._modalNums],
+    savedAt: new Date().toLocaleString('ko-KR'),
+  };
+  if (_editingRuleId) {
+    const idx = rules.findIndex(r => r.id === _editingRuleId);
+    if (idx >= 0) rules[idx] = ruleData; else rules.push(ruleData);
+  } else {
+    rules.push(ruleData);
+  }
+  _saveRulesToStorage(rules);
+  closeRuleModal();
+  renderRulesList();
+}
+
+function deleteRule(ruleId) {
+  if (!confirm('이 규칙을 삭제하시겠습니까?')) return;
+  _saveRulesToStorage(_loadRules().filter(r => r.id !== ruleId));
+  renderRulesList();
+}
+
+function renderRulesList() {
+  const rules = _loadRules();
+  const container = document.getElementById('rules-list');
+  if (rules.length === 0) {
+    container.innerHTML = '<div class="rules-empty">저장된 규칙이 없습니다.<br>위의 <b>+ 새 규칙 추가</b> 버튼으로 첫 규칙을 만들어 보세요.</div>';
+    return;
+  }
+  container.innerHTML = rules.map(rule => `
+    <div class="rule-card">
+      <div class="rule-card-header">
+        <div>
+          <div class="rule-name">${_esc(rule.name)}</div>
+          ${rule.savedAt ? `<div style="font-size:.72rem;color:#94a3b8;margin-top:.15rem">저장: ${_esc(rule.savedAt)}</div>` : ''}
+        </div>
+        <div class="rule-actions">
+          <button class="btn btn-secondary" style="font-size:.75rem;padding:.3rem .75rem" onclick="openRuleModal('${rule.id}')">편집</button>
+          <button class="btn btn-danger" style="font-size:.75rem;padding:.3rem .75rem" onclick="deleteRule('${rule.id}')">삭제</button>
+        </div>
+      </div>
+      <div class="rule-nums">
+        ${!rule.numbers || rule.numbers.length === 0
+          ? '<span style="color:#94a3b8;font-size:.78rem">번호 없음</span>'
+          : rule.numbers.map(n => `<span class="rule-num-chip">${n}번</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function _esc(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 </script>
 </body>
