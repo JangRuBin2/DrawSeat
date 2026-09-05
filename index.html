@@ -805,10 +805,7 @@
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;flex-wrap:wrap;gap:.5rem">
         <div class="card-title" style="margin:0">붙으면 안 되는 학우</div>
-        <div style="display:flex;gap:.4rem">
-          <button class="btn btn-secondary" onclick="copyShareURL()">🔗 링크 복사</button>
-          <button class="btn btn-primary" onclick="openRuleModal()">+ 새 규칙 추가</button>
-        </div>
+        <button class="btn btn-primary" onclick="openRuleModal()">+ 새 규칙 추가</button>
       </div>
       <p class="hint">자리 배정 시 특정 번호끼리 붙지 않도록 규칙을 저장하세요. <b>링크 복사</b>로 생성한 URL을 공유하면 다른 기기에서도 동일한 규칙이 자동 적용됩니다.</p>
       <div id="rules-list"></div>
@@ -1581,18 +1578,14 @@ function _decodeRulesHash(hash) {
   } catch { /* invalid hash — ignore */ }
 })();
 
-function copyShareURL() {
-  const rules = _loadRules();
-  if (!rules.length) {
-    showToast('저장된 규칙이 없습니다');
-    return;
-  }
-  const hash = _encodeRulesHash(rules);
-  const url = location.origin + location.pathname + (hash ? '#' + hash : '');
+function copyShareURL(ruleId) {
+  const rule = _loadRules().find(r => r.id === ruleId);
+  if (!rule) { showToast('규칙을 찾을 수 없습니다'); return; }
+  const hash = _encodeRulesHash([rule]);
+  const url = location.origin + location.pathname + '#' + hash;
   navigator.clipboard.writeText(url)
-    .then(() => showToast('링크가 복사되었습니다 ✓'))
+    .then(() => showToast(`"${rule.name}" 링크 복사 완료 ✓`))
     .catch(() => {
-      // Fallback for browsers that block clipboard
       prompt('아래 링크를 복사하세요:', url);
     });
 }
@@ -1736,6 +1729,7 @@ function renderRulesList() {
           ${rule.savedAt ? `<div style="font-size:.72rem;color:#94a3b8;margin-top:.15rem">저장: ${_esc(rule.savedAt)}</div>` : ''}
         </div>
         <div class="rule-actions">
+          <button class="btn btn-secondary" style="font-size:.75rem;padding:.3rem .75rem" onclick="copyShareURL('${rule.id}')">🔗 링크 복사</button>
           <button class="btn btn-secondary" style="font-size:.75rem;padding:.3rem .75rem" onclick="openRuleModal('${rule.id}')">편집</button>
           <button class="btn btn-danger" style="font-size:.75rem;padding:.3rem .75rem" onclick="deleteRule('${rule.id}')">삭제</button>
         </div>
